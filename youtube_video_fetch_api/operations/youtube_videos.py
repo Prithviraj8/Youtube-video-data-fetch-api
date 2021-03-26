@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 import schedule
 from googleapiclient.discovery import build
 from youtube_video_fetch_api.models import VideoInformation
+from background_task import background
 
 DEVELOPER_KEY = "AIzaSyBIxTFqhbDUEiKPN0RBQ8fzBRmCwg902IA"
 YOUTUBE_API_SERVICE_NAME = "youtube"
@@ -33,12 +34,13 @@ def youtube_search(q="cricket", max_results=50, order="relevance", token=None, l
 
     for search_result in search_response.get("items", []):
         if search_result["id"]["kind"] == "youtube#video":
-            videos.append(search_result)
+            video_info = {'video_id': search_result['id']['videoId'],
+                          'video_title': search_result['snippet']['title'],
+                          'video_description': search_result['snippet']['description'],
+                          'video_publishedDateTime': search_result['snippet']['publishedAt']}
+            videos.append(video_info)
+            save_video_information(**video_info)
 
-            save_video_information(video_id=search_result['id']['videoId'],
-                                   video_title=search_result['snippet']['title'],
-                                   video_description=search_result['snippet']['description'],
-                                   video_publishedDateTime=search_result['snippet']['publishedAt'])
     try:
         next_token = search_response["nextPageToken"]
         return next_token, videos
