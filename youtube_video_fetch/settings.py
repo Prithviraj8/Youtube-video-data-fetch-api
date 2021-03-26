@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'youtube_video_fetch_api',
     'django_cron',
-    'rest_framework'
+    'rest_framework',
+    'background_task',
 ]
 
 MIDDLEWARE = [
