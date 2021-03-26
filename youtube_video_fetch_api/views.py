@@ -1,16 +1,18 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework import filters
+from rest_framework import filters, mixins
 from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import VideoInformation
 from .serializers.serializers import YoutubeVideoFetchSerializer
 
 # Rest FrameWork
+from rest_framework.viewsets import GenericViewSet
 from rest_framework import generics
 from rest_framework.pagination import CursorPagination
 
 from youtube_video_fetch_api.operations import youtube_videos
+
 
 class ResultsPagination(CursorPagination):
     page_size = 25
@@ -21,7 +23,9 @@ class ResultsPagination(CursorPagination):
 # Searching is implemented using DRF Filters
 # DRF filter by default uses [icontains] and thus the search by default supports partial searches
 
-class YoutubeVideoFetchViewSet(generics.ListAPIView):
+class YoutubeVideoFetchViewSet(mixins.RetrieveModelMixin,
+                               mixins.ListModelMixin,
+                               GenericViewSet):
     filterset_fields = ['channel_id', 'channel_title']
     ordering = ('-publishedAt')
     queryset = VideoInformation.objects.all()
