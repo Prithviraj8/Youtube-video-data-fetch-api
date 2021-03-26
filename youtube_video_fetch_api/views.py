@@ -10,6 +10,7 @@ from .serializers.serializers import YoutubeVideoFetchSerializer
 from rest_framework import generics
 from rest_framework.pagination import CursorPagination
 
+from youtube_video_fetch_api.operations import youtube_videos
 
 class ResultsPagination(CursorPagination):
     page_size = 25
@@ -26,3 +27,11 @@ class YoutubeVideoFetchViewSet(generics.ListAPIView):
     queryset = VideoInformation.objects.all()
     serializer_class = YoutubeVideoFetchSerializer
     pagination_class = ResultsPagination
+
+    def list(self, request, *args, **kwargs):
+        video_title = request.query_params.dict()['title']
+        try:
+            result = youtube_videos.youtube_search(video_title)
+        except Exception as e:
+            return Response({"Error ": e})
+        return Response({"results :": result})
