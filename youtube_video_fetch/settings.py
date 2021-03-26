@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'youtube_video_fetch_api',
+    'youtube_video_fetch_api.apps.YoutubeVideoFetchApiConfig',
     'django_cron',
     'rest_framework',
     'background_task',

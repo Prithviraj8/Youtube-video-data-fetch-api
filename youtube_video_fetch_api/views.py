@@ -1,8 +1,3 @@
-import subprocess
-import threading
-import time
-
-from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import filters, mixins
 from django_filters.rest_framework import DjangoFilterBackend
@@ -16,6 +11,7 @@ from rest_framework import generics
 from rest_framework.pagination import CursorPagination
 
 from youtube_video_fetch_api.operations import youtube_videos
+from youtube_video_fetch_api.operations import scheduler
 
 
 class ResultsPagination(CursorPagination):
@@ -23,9 +19,6 @@ class ResultsPagination(CursorPagination):
     page_size_query_param = 'page_size'
     max_page_size = 100
 
-
-# Searching is implemented using DRF Filters
-# DRF filter by default uses [icontains] and thus the search by default supports partial searches
 
 class YoutubeVideoFetchViewSet(GenericViewSet):
 
