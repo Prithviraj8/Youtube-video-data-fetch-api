@@ -9,7 +9,7 @@ YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
 '''
-Using *cricket* to query for results based on the video title passed
+Using *cricket* as default to search for results from youtube data api
 '''
 
 
