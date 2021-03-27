@@ -12,13 +12,15 @@
     * Also, the search results will be stored in the database, every 0.1 minute, as long as the server is running.
     * Inside the setting.py file, fill the variable DEVELOPER_KEYS with all the API Keys available,the list should be filled as ['API_KEY_1', 'API_KEY_2',...]
 
-## The project handles if any api key is invalid, or runs out of quota.
-
+## Pass in any video title directly in the request url as a param to get results
 ![Screenshot 2021-03-27 at 1 37 28 PM](https://user-images.githubusercontent.com/31995793/112714699-94da3600-8f01-11eb-8494-02c406b1956c.png)
 
 ## Results(videos list) appear in a chronological order of their published date & time
 ![Screenshot 2021-03-27 at 1 37 40 PM](https://user-images.githubusercontent.com/31995793/112714706-9ad01700-8f01-11eb-96a9-789845aba6bc.png)
-
+  
+  
+## The project handles if any api key is invalid, or runs out of quota.
+![Screenshot 2021-03-27 at 1 43 34 PM](https://user-images.githubusercontent.com/31995793/112714881-a112c300-8f02-11eb-8689-a3158fdbb130.png)
  
 ## Code formatting
 
