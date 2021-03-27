@@ -1,8 +1,9 @@
+import apiclient
+from rest_framework import generics
 from rest_framework.response import Response
 from .serializers.serializers import YoutubeVideoFetchSerializer
 
 # Rest FrameWork
-from rest_framework.viewsets import GenericViewSet
 from rest_framework.pagination import CursorPagination
 
 # Model
@@ -16,6 +17,7 @@ class ResultsPagination(CursorPagination):
 
 
 class YoutubeVideoFetchViewSet(generics.ListAPIView):
+
     def list(self, request, **kwargs):
         serializer = YoutubeVideoFetchSerializer(data=request.query_params.dict())
         serializer.is_valid(raise_exception=True)
@@ -23,6 +25,6 @@ class YoutubeVideoFetchViewSet(generics.ListAPIView):
 
         try:
             result = youtube_videos.youtube_search(video_title)
-        except Exception as e:
-            return Response({"Error ": e})
+        except (Exception, apiclient.errors.HttpError) as err:
+            return Response({"Error ": err})
         return Response({"results :": result})
