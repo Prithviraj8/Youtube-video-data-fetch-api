@@ -1,6 +1,10 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from . import youtube_videos
 
+'''
+Job scheduler to save fetched youtube videos data to local db
+'''
+
 
 def start():
     scheduler = BackgroundScheduler()

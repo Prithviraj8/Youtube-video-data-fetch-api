@@ -126,3 +126,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Google Developer API Keys
+DEVELOPER_KEY = "AIzaSyBIxTFqhbDUEiKPN0RBQ8fzBRmCwg902IA"
+YOUTUBE_API_SERVICE_NAME = "youtube"
+YOUTUBE_API_VERSION = "v3"

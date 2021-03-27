@@ -1,12 +1,11 @@
 from datetime import datetime, timedelta
-import schedule
 from googleapiclient.discovery import build
 from youtube_video_fetch_api.models import VideoInformation
-from background_task import background
+from youtube_video_fetch import settings
 
-DEVELOPER_KEY = "AIzaSyBIxTFqhbDUEiKPN0RBQ8fzBRmCwg902IA"
-YOUTUBE_API_SERVICE_NAME = "youtube"
-YOUTUBE_API_VERSION = "v3"
+DEVELOPER_KEY = settings.DEVELOPER_KEY
+YOUTUBE_API_SERVICE_NAME = settings.YOUTUBE_API_SERVICE_NAME
+YOUTUBE_API_VERSION = settings.YOUTUBE_API_VERSION
 
 '''
 Using *cricket* as default to search for results from youtube data api
@@ -61,16 +60,3 @@ def save_video_information(video_id, video_title, video_description, video_publi
                                       video_description=str(video_description),
                                       video_publishedDateTime=video_publishedDateTime)
     video.save()
-
-
-def geo_query(video_id):
-    youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
-                    developerKey=DEVELOPER_KEY)
-
-    video_response = youtube.videos().list(
-        id=video_id,
-        part='snippet, recordingDetails, statistics'
-
-    ).execute()
-
-    return video_response

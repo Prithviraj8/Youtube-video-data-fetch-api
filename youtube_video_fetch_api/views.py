@@ -1,17 +1,12 @@
 from rest_framework.response import Response
-from rest_framework import filters, mixins
-from django_filters.rest_framework import DjangoFilterBackend
-
-from .models import VideoInformation
 from .serializers.serializers import YoutubeVideoFetchSerializer
 
 # Rest FrameWork
 from rest_framework.viewsets import GenericViewSet
-from rest_framework import generics
 from rest_framework.pagination import CursorPagination
 
+# Model
 from youtube_video_fetch_api.operations import youtube_videos
-from youtube_video_fetch_api.operations import scheduler
 
 
 class ResultsPagination(CursorPagination):
