@@ -10,6 +10,7 @@
   * Open postman, and type `http://127.0.0.1:8000/youtube_video_fetch?video_title=superman` in the <b>Enter request URL</b> tab
     * Note: video_title is a query parameter and you can give it any value(eg: superman) to get the seach results based on that, from youtube.
     * Also, the search results will be stored in the database, every 0.1 minute, as long as the server is running.
+    * I have used <a href='https://apscheduler.readthedocs.io/en/stable/userguide.html'>apscheduler</a> to schedule jobs.
     * Inside the setting.py file, fill the variable DEVELOPER_KEYS with all the API Keys available,the list should be filled as ['API_KEY_1', 'API_KEY_2',...]
 
 ## Pass in any video title directly in the request url as a param to get results
