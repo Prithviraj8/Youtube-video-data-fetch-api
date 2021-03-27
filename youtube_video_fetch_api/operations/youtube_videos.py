@@ -24,9 +24,12 @@ def youtube_search(
     location=None,
     location_radius=None,
 ):
+    valid_key = False
     search_response = {}
-    for developerKey in DEVELOPER_KEYS:
+    error = {}
+    for i, developerKey in enumerate(DEVELOPER_KEYS):
         try:
+            print(developerKey)
             youtube = build(
                 YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=developerKey
             )
@@ -50,11 +53,15 @@ def youtube_search(
             valid_key = True
         except apiclient.errors.HttpError as err:
             # Sending an appropriate error message when google api provided is invalid
-            err = json.loads(err.content)['error']['message']
-            return err
+            error[developerKey] = json.loads(err.content)['error']['message']
 
         if valid_key:
             break
+        elif i == len(DEVELOPER_KEYS) - 1:
+            return error
+        else:
+            continue
+
 
     videos = []
 
