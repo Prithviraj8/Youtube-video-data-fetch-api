@@ -1,9 +1,13 @@
+import json
 from datetime import datetime, timedelta
+from pprint import pprint
+
+import apiclient
 from googleapiclient.discovery import build
 from youtube_video_fetch_api.models import VideoInformation
 from youtube_video_fetch import settings
 
-DEVELOPER_KEY = settings.DEVELOPER_KEY
+DEVELOPER_KEYS = settings.DEVELOPER_KEYS
 YOUTUBE_API_SERVICE_NAME = settings.YOUTUBE_API_SERVICE_NAME
 YOUTUBE_API_VERSION = settings.YOUTUBE_API_VERSION
 
@@ -20,26 +24,37 @@ def youtube_search(
     location=None,
     location_radius=None,
 ):
-    youtube = build(
-        YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY
-    )
-    time_now = datetime.now()
-    last_request_time = time_now - timedelta(minutes=5)
-    search_response = (
-        youtube.search()
-        .list(
-            q=q,
-            type="video",
-            pageToken=token,
-            order=order,
-            part="id,snippet",
-            maxResults=max_results,
-            location=location,
-            locationRadius=location_radius,
-            publishedAfter=(last_request_time.replace(microsecond=0).isoformat() + "Z"),
-        )
-        .execute()
-    )
+    search_response = {}
+    for developerKey in DEVELOPER_KEYS:
+        try:
+            youtube = build(
+                YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=developerKey
+            )
+            time_now = datetime.now()
+            last_request_time = time_now - timedelta(minutes=5)
+            search_response = (
+                youtube.search()
+                .list(
+                    q=q,
+                    type="video",
+                    pageToken=token,
+                    order=order,
+                    part="id,snippet",
+                    maxResults=max_results,
+                    location=location,
+                    locationRadius=location_radius,
+                    publishedAfter=(last_request_time.replace(microsecond=0).isoformat() + "Z"),
+                )
+                .execute()
+            )
+            valid_key = True
+        except apiclient.errors.HttpError as err:
+            # Sending an appropriate error message when google api provided is invalid
+            err = json.loads(err.content)['error']['message']
+            return err
+
+        if valid_key:
+            break
 
     videos = []
 
