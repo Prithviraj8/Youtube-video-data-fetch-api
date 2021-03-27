@@ -5,8 +5,9 @@ from django.apps import AppConfig
 
 
 class YoutubeVideoFetchApiConfig(AppConfig):
-    name = 'youtube_video_fetch_api'
+    name = "youtube_video_fetch_api"
 
     def ready(self):
         from youtube_video_fetch_api.operations import scheduler
+
         scheduler.start()

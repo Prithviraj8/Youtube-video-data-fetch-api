@@ -10,5 +10,10 @@ class VideoInformation(models.Model):
 
     @classmethod
     def create(cls, video_id, video_title, video_description, video_publishedDateTime):
-        video = cls(video_id=video_id, video_title=video_title, video_description=video_description, video_publishedDateTime=video_publishedDateTime)
+        video = cls(
+            video_id=video_id,
+            video_title=video_title,
+            video_description=video_description,
+            video_publishedDateTime=video_publishedDateTime,
+        )
         return video
