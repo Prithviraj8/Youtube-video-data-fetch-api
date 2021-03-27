@@ -6,34 +6,34 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('youtube_video_fetch_api', '0001_initial'),
+        ("youtube_video_fetch_api", "0001_initial"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='videoinformation',
-            old_name='description',
-            new_name='video_description',
+            model_name="videoinformation",
+            old_name="description",
+            new_name="video_description",
         ),
         migrations.RenameField(
-            model_name='videoinformation',
-            old_name='publishedDateTime',
-            new_name='video_publishedDateTime',
+            model_name="videoinformation",
+            old_name="publishedDateTime",
+            new_name="video_publishedDateTime",
         ),
         migrations.RemoveField(
-            model_name='videoinformation',
-            name='channel_id',
+            model_name="videoinformation",
+            name="channel_id",
         ),
         migrations.RemoveField(
-            model_name='videoinformation',
-            name='channel_title',
+            model_name="videoinformation",
+            name="channel_title",
         ),
         migrations.RemoveField(
-            model_name='videoinformation',
-            name='created',
+            model_name="videoinformation",
+            name="created",
         ),
         migrations.RemoveField(
-            model_name='videoinformation',
-            name='thumbnailsUrls',
+            model_name="videoinformation",
+            name="thumbnailsUrls",
         ),
     ]

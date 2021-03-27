@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from youtube_video_fetch_api.views import YoutubeVideoFetchViewSet
+
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^youtube_video_fetch/', YoutubeVideoFetchViewSet.as_view())
+    url(r"^admin/", admin.site.urls),
+    url(r"^youtube_video_fetch/", YoutubeVideoFetchViewSet.as_view()),
 ]

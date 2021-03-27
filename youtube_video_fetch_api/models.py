@@ -10,9 +10,10 @@ class VideoInformation(models.Model):
 
     @classmethod
     def create(cls, video_id, video_title, video_description, video_publishedDateTime):
-        video = cls(video_id=video_id, video_title=video_title, video_description=video_description, video_publishedDateTime=video_publishedDateTime)
+        video = cls(
+            video_id=video_id,
+            video_title=video_title,
+            video_description=video_description,
+            video_publishedDateTime=video_publishedDateTime,
+        )
         return video
-
-    # channel_id = models.CharField(null=False, blank=False, max_length=500)
-    # channel_title = models.CharField(null=True, blank=True, max_length=500)
-    # created = models.DateTimeField(auto_now_add=True, null=True, blank=True,)
