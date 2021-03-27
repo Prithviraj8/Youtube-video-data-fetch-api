@@ -20,9 +20,9 @@ class ResultsPagination(CursorPagination):
     max_page_size = 100
 
 
-class YoutubeVideoFetchViewSet(GenericViewSet):
+class YoutubeVideoFetchViewSet(generics.ListAPIView):
 
-    def list(self, request):
+    def list(self, request, **kwargs):
         serializer = YoutubeVideoFetchSerializer(data=request.query_params.dict())
         serializer.is_valid(raise_exception=True)
         video_title = serializer.validated_data['video_title']
