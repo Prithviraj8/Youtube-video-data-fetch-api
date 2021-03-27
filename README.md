@@ -20,8 +20,8 @@
   
   
 ## The project handles if any api key is invalid, or runs out of quota.
-![Screenshot 2021-03-27 at 1 43 34 PM](https://user-images.githubusercontent.com/31995793/112714881-a112c300-8f02-11eb-8689-a3158fdbb130.png)
- 
+![Screenshot 2021-03-27 at 2 10 17 PM](https://user-images.githubusercontent.com/31995793/112715438-306da580-8f06-11eb-8d75-fa685b7b32a8.png)
+
 ## Code formatting
 
 I have used the [black](https://black.readthedocs.io/en/stable/) to format this project.
